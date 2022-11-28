@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/28 11:16:30 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:01:37 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ typedef struct s_file_data
 	char	*floor_color;
 	char	*ceiling_color;
 	char	**file_data;
-} t_file_data;
+	size_t	map_idx;
+}	t_file_data;
 
 typedef struct s_cub
 {
 	t_file_data	data;
+	char		**map;
 }	t_cub;
 
 #endif /* CUB3D_H */

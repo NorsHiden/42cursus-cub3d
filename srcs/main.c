@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:37:34 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/28 12:06:52 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/11/28 17:24:25 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,11 @@ void	import_data(t_cub *cub)
 		line = get_next_line(cub->data.fd);
 		if (!line)
 			break ;
+		else if (*line == '\n')
+		{
+			free(line);
+			line = ft_strdup(" \n");
+		}
 		shifter = data;
 		data = ft_strjoin(shifter, line);
 		free(shifter);
@@ -171,12 +176,76 @@ void	import_color(t_cub *cub, size_t *idx, int sym)
 		{
 			if (find_symbol(cub->data.file_data[*idx]) != sym)
 				throw_error(": Color not found", cub->data.file_data[*idx]);
+			if (sym == F_C)
+				cub->data.floor_color = cub->data.file_data[*idx];
+			else
+				cub->data.ceiling_color = cub->data.file_data[*idx];
 			(*idx)++;
 			break ;
 		}
 		free(checker);
 		(*idx)++;
 	}
+}
+
+void	fill_map(t_cub *cub)
+{
+	size_t	i;
+	size_t	count;
+	size_t	empty_line;
+	char	*trimmed_line;
+	
+	i = cub->data.map_idx;
+	count = 0;
+	empty_line = 0;
+	while (cub->data.file_data[i + empty_line])
+	{
+		trimmed_line = ft_strtrim(cub->data.file_data[i + empty_line], " ");
+		if (!*trimmed_line)
+			empty_line++;
+		else
+		{
+			i += empty_line;
+			count += empty_line;
+			count++;
+			empty_line = 0;
+			i++;
+		}
+		free(trimmed_line);
+	}
+	if (!count)
+		throw_error("No map found", NULL);
+	cub->map = malloc(sizeof(char*) * (count + 1));
+	i = 0;
+	while (i < count)
+	{
+		cub->map[i] = cub->data.file_data[cub->data.map_idx + i];
+		i++;
+	}
+	cub->map[i] = 0;
+}
+
+void	import_map(t_cub *cub)
+{
+	size_t	i;
+	size_t	empty_line;
+	char	*trimmed_line;
+
+	i = cub->data.map_idx;
+	trimmed_line = 0;
+	while (cub->data.file_data[i])
+	{
+		trimmed_line = ft_strtrim(cub->data.file_data[i], " ");
+		if (*trimmed_line)
+			break ;
+		free(trimmed_line);
+		trimmed_line = 0;
+		i++;
+	}
+	cub->data.map_idx = i;
+	if (trimmed_line)
+		free(trimmed_line);
+	fill_map(cub);
 }
 
 void	import_configs(t_cub *cub)
@@ -190,6 +259,10 @@ void	import_configs(t_cub *cub)
 	import_cardinal_direction(cub, &i, EA);
 	import_color(cub, &i, F_C);
 	import_color(cub, &i, C_C);
+	cub->data.map_idx = i;
+	import_map(cub);
+	for (size_t j = 0; cub->map[j]; j++)
+		printf("map[%lu] = %s\n", j, cub->map[j]);
 }
 
 void	import_file(t_cub *cub, char *filename)
