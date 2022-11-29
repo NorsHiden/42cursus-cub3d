@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/29 08:57:16 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:56:38 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define F_C 5
 # define C_C 6
 
+# define TILE_SIZE 32
+
 typedef struct s_file_data
 {
 	int		fd;
@@ -43,13 +45,26 @@ typedef struct s_file_data
 	size_t	map_idx;
 }	t_file_data;
 
+typedef struct s_texture
+{
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
+	int		floor;
+	int		ceiling;
+}	t_texture;
+
 typedef struct s_cub
 {
 	t_file_data	data;
+	t_texture	texture;
+	void		*mlx;
+	void		*window;
 	char		**map;
 }	t_cub;
 
-/*--------------------IMPORT_FUNCTIONS--------------------*/
+/*--------------------IMPORT_FUNCTIONS---------------------------*/
 void	import_cardinal_direction(t_cub *cub, size_t *idx, int sym);
 void	import_data(t_cub *cub);
 void	import_color(t_cub *cub, size_t *idx, int sym);
@@ -62,6 +77,16 @@ char	**pointer_to_target_symbol(t_cub *cub, int symbol);
 int		find_symbol(char *line);
 int		is_rgb(char *line, size_t i);
 int		is_cardinal_directions(char *line, size_t i);
+
+/*-------------------TEXTURE_VALIDATION_FUNCTIONS-----------------*/
+void	import_texture(t_cub *cub);
+void	*valid_texture(t_cub *cub, char *filename);
+int		valid_color(t_cub *cub, char *color, char c);
+int		grab_color(char *color, size_t *i);
+void	check_color(char *color, int *full_color, int *times);
+void	adjust_map_size(t_cub *cub);
+int		find_big_size(char **map);
+void	enlarge_line(char **line, size_t new_size);
 
 /*--------------------ERROR_HANDLING_FUNCTIONS--------------------*/
 void	throw_error(char *err, char *cause);

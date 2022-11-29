@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 08:47:14 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/29 09:04:36 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:43:07 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	count_map_line(t_cub *cub, size_t *i, size_t *count)
 	char	*trimmed_line;
 
 	empty_line = 0;
+	trimmed_line = 0;
 	while (cub->data.file_data[*i + empty_line])
 	{
 		trimmed_line = ft_strtrim(cub->data.file_data[*i + empty_line], " ");
@@ -39,15 +40,12 @@ void	fill_map(t_cub *cub)
 {
 	size_t	i;
 	size_t	count;
-	size_t	empty_line;
-	char	*trimmed_line;
 
 	i = cub->data.map_idx;
 	count = 0;
-	empty_line = 0;
 	count_map_line(cub, &i, &count);
 	if (!count)
-		throw_error("No map found", NULL);
+		throw_error("no map found", NULL);
 	cub->map = malloc(sizeof(char *) * (count + 1));
 	i = 0;
 	while (i < count)
@@ -100,7 +98,7 @@ void	import_file(t_cub *cub, char *filename)
 {
 	cub->data.fd = open(filename, O_RDONLY);
 	if (cub->data.fd < 0)
-		throw_error(": Inaccessible file", filename);
+		throw_error(": inaccessible file", filename);
 	import_data(cub);
 	import_configs(cub);
 }
