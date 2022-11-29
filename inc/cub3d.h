@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/28 17:01:37 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/11/29 08:57:16 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,22 @@ typedef struct s_cub
 	t_file_data	data;
 	char		**map;
 }	t_cub;
+
+/*--------------------IMPORT_FUNCTIONS--------------------*/
+void	import_cardinal_direction(t_cub *cub, size_t *idx, int sym);
+void	import_data(t_cub *cub);
+void	import_color(t_cub *cub, size_t *idx, int sym);
+void	fill_map(t_cub *cub);
+void	import_map(t_cub *cub);
+void	import_configs(t_cub *cub);
+void	import_file(t_cub *cub, char *filename);
+void	import_symbol(t_cub *cub, int symbol, char *line);
+char	**pointer_to_target_symbol(t_cub *cub, int symbol);
+int		find_symbol(char *line);
+int		is_rgb(char *line, size_t i);
+int		is_cardinal_directions(char *line, size_t i);
+
+/*--------------------ERROR_HANDLING_FUNCTIONS--------------------*/
+void	throw_error(char *err, char *cause);
 
 #endif /* CUB3D_H */
