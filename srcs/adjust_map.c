@@ -6,13 +6,19 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 13:55:45 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/29 13:56:23 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/11/30 08:29:49 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	enlarge_line(char **line, size_t new_size)
+static int	valid_map_symbol(char c)
+{
+	return (c == '1' || c == '0' || c == 'N' || c == ' '
+		|| c == 'S' || c == 'E' || c == 'W');
+}
+
+static void	enlarge_line(char **line, size_t new_size)
 {
 	char	*new_line;
 	size_t	i;
@@ -21,6 +27,8 @@ void	enlarge_line(char **line, size_t new_size)
 	i = 0;
 	while ((*line)[i])
 	{
+		if (!valid_map_symbol((*line)[i]))
+			throw_error("invalid map symbol", NULL);
 		new_line[i] = (*line)[i];
 		i++;
 	}
@@ -30,7 +38,7 @@ void	enlarge_line(char **line, size_t new_size)
 	*line = new_line;
 }
 
-int	find_big_size(char **map)
+static int	find_big_size(char **map)
 {
 	size_t	i;
 	size_t	big_size;
@@ -57,4 +65,5 @@ void	adjust_map_size(t_cub *cub)
 	big_size = find_big_size(cub->map);
 	while (cub->map[i])
 		enlarge_line(&cub->map[i++], big_size);
+	map_valid(cub);
 }

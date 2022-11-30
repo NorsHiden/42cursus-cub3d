@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/29 13:56:38 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/11/30 08:51:17 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_cub
 	char		**map;
 }	t_cub;
 
-/*--------------------IMPORT_FUNCTIONS---------------------------*/
+/*------------------IMPORT_FUNCTIONS---------------------------*/
 void	import_cardinal_direction(t_cub *cub, size_t *idx, int sym);
 void	import_data(t_cub *cub);
 void	import_color(t_cub *cub, size_t *idx, int sym);
@@ -78,17 +78,19 @@ int		find_symbol(char *line);
 int		is_rgb(char *line, size_t i);
 int		is_cardinal_directions(char *line, size_t i);
 
-/*-------------------TEXTURE_VALIDATION_FUNCTIONS-----------------*/
+/*--------------MAP_AND_TEXTURE_VALIDATION_FUNCTIONS-----------------*/
 void	import_texture(t_cub *cub);
 void	*valid_texture(t_cub *cub, char *filename);
 int		valid_color(t_cub *cub, char *color, char c);
 int		grab_color(char *color, size_t *i);
 void	check_color(char *color, int *full_color, int *times);
 void	adjust_map_size(t_cub *cub);
-int		find_big_size(char **map);
-void	enlarge_line(char **line, size_t new_size);
+void	map_valid(t_cub *cub);
+void	check_line_validation(char **map, size_t y);
+void	check_symbol_sensitivity(char **map, size_t y, size_t x, char sym);
+size_t	ptrlen(char **str);
 
-/*--------------------ERROR_HANDLING_FUNCTIONS--------------------*/
+/*-----------------ERROR_HANDLING_FUNCTIONS--------------------*/
 void	throw_error(char *err, char *cause);
 
 #endif /* CUB3D_H */
