@@ -6,11 +6,21 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 08:29:56 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/01 09:50:27 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/01 09:55:40 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+size_t	ptrlen(char **str)
+{
+	size_t	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
 
 void	check_symbol_sensitivity(char **map, size_t y, size_t x, char sym)
 {
