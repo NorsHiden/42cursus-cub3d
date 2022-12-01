@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/30 08:51:17 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/01 09:49:14 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_cub
 	void		*mlx;
 	void		*window;
 	char		**map;
+	int			player_orientation;
 }	t_cub;
 
 /*------------------IMPORT_FUNCTIONS---------------------------*/
@@ -86,7 +87,7 @@ int		grab_color(char *color, size_t *i);
 void	check_color(char *color, int *full_color, int *times);
 void	adjust_map_size(t_cub *cub);
 void	map_valid(t_cub *cub);
-void	check_line_validation(char **map, size_t y);
+void	check_line_validation(char **map, int *player_orientation, size_t y);
 void	check_symbol_sensitivity(char **map, size_t y, size_t x, char sym);
 size_t	ptrlen(char **str);
 
