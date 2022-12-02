@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS =  -I./inc -I./libft -framework Appkit -framework Opengl -lmlx
+CFLAGS =  -I./inc -I./libft -framework Appkit -framework Opengl -lmlx -fsanitize=address -g
 
 SRCS = 	srcs/main.c srcs/loading_data/import_file.c srcs/loading_data/import_config.c srcs/loading_data/error_handling.c \
 		srcs/loading_data/import_utils.c srcs/loading_data/texture_validation.c srcs/loading_data/adjust_map.c \

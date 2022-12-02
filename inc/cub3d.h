@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/01 09:49:14 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/02 09:23:15 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,17 @@
 # define F_C 5
 # define C_C 6
 
+# define WINDOW_WIDTH 1366
+# define WINDOW_HEIGHT 768
+
+# define MINIMAP_FACTOR 1
 # define TILE_SIZE 32
+# define MAP_TILE_SIZE TILE_SIZE / MINIMAP_FACTOR
+# define PLAYER_SIZE MAP_TILE_SIZE / 4
+
+# define LARGE_TO_SMALL_SCALE (((double)WINDOW_WIDTH / (double)MINIMAP_FACTOR) / (double)WINDOW_WIDTH)
+
+# define PI 3.14159265359
 
 typedef struct s_file_data
 {
@@ -55,12 +65,36 @@ typedef struct s_texture
 	int		ceiling;
 }	t_texture;
 
+typedef struct s_settings
+{
+	void		*mlx;
+	void		*window;
+	void		*frame;
+	char		*frame_addr;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+}	t_settings;
+
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	angle_rotation;
+}	t_player;
+
+typedef struct s_cord
+{
+	int	x;
+	int	y;
+}	t_cord;
+
 typedef struct s_cub
 {
 	t_file_data	data;
 	t_texture	texture;
-	void		*mlx;
-	void		*window;
+	t_settings	settings;
+	t_player	player;
 	char		**map;
 	int			player_orientation;
 }	t_cub;

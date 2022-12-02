@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 13:46:28 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/29 13:55:06 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/01 10:03:14 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*valid_texture(t_cub *cub, char *filename)
 
 	width = 0;
 	height = 0;
-	texture = mlx_xpm_file_to_image(cub->mlx, filename, &width, &height);
+	texture = mlx_xpm_file_to_image(cub->settings.mlx, filename, &width, &height);
 	if (!texture)
 		throw_error(": inaccessible texture", filename);
 	else if (width != TILE_SIZE || height != TILE_SIZE)
@@ -85,4 +85,5 @@ void	import_texture(t_cub *cub)
 	cub->texture.ea = valid_texture(cub, cub->data.ea_filename);
 	cub->texture.floor = valid_color(cub, cub->data.floor_color, 'F');
 	cub->texture.ceiling = valid_color(cub, cub->data.ceiling_color, 'C');
+	adjust_map_size(cub);
 }
