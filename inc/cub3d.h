@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/04 13:06:46 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/04 13:22:46 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define WINDOW_WIDTH 1366
 # define WINDOW_HEIGHT 768
 
-# define MINIMAP_FACTOR 1
+# define MINIMAP_FACTOR 4
 # define TILE_SIZE 32
 
 # define MAP_TILE_SIZE TILE_SIZE / MINIMAP_FACTOR

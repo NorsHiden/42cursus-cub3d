@@ -6,13 +6,11 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:37:34 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/04 13:05:12 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/04 13:22:18 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
-
-
 
 void	display_minimap(t_cub *cub)
 {
