@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/04 13:22:46 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/04 17:04:38 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define WINDOW_WIDTH 1366
 # define WINDOW_HEIGHT 768
 
-# define MINIMAP_FACTOR 4
+# define MINIMAP_FACTOR 1
 # define TILE_SIZE 32
 
 # define MAP_TILE_SIZE TILE_SIZE / MINIMAP_FACTOR
@@ -81,11 +81,16 @@ typedef struct s_settings
 {
 	void		*mlx;
 	void		*window;
+	void		*minimap_layer;
+	char		*minimap_layer_addr;
+	int			minimap_bits_per_pixel;
+	int			minimap_size_line;
+	int			minimap_endian;
 	void		*frame;
 	char		*frame_addr;
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
+	int			frame_bits_per_pixel;
+	int			frame_size_line;
+	int			frame_endian;
 }	t_settings;
 
 typedef struct s_player
@@ -161,6 +166,7 @@ void	draw_player(t_cub *cub);
 void	setup_player(t_cub *cub);
 void	fill_player(t_cub *cub, t_cord pos);
 void	draw_pixel(t_cub *cub, int x, int y, int color);
+void	draw_pixel_frame(t_cub *cub, int x, int y, int color);
 void	draw_minimap(t_cub *cub);
 void	draw_square(t_cub *cub, t_cord pos, t_cord *start, int color);
 void	draw_line(t_cub *cub, t_cord start, t_cord end, int color);
@@ -170,6 +176,14 @@ void	update_rays(t_cub *cub);
 void	cast_ray(t_cub *cub, double angle, int idx);
 t_fcord	get_vertical_intersection(t_cub *cub, t_ray *ray);
 t_fcord	get_horizontal_intersection(t_cub *cub, t_ray *ray);
+void	render_layer(t_cub *cub);
+int		get_color_from_minimap(t_cub *cub, int x, int y);
+void	draw_rays(t_cub *cub);
+void	display_minimap(t_cub *cub);
+
+/*--------------------GAME_FUNCTIONS--------------------------*/
+void	launch_game(t_cub *cub);
+void 	reset_frame(t_cub *cub);
 
 /*--------------------HOOK_FUNCTIONS--------------------------*/
 int		key_pressed(int key, t_cub *cub);

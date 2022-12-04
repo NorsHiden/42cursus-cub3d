@@ -1,18 +1,2 @@
 - wall_collision need to be fixed
-		
-
-	// t_cord start;
-	// t_cord end;
-	// start.x = cub->start.x + (cub->player.x * LARGE_TO_SMALL_SCALE);
-	// start.y = cub->start.y + (cub->player.y * LARGE_TO_SMALL_SCALE);
-	// if (sqrt(pow(hor_intercept.x - cub->player.x, 2) + pow(hor_intercept.y - cub->player.y, 2)) < sqrt(pow(ver_intercept.x - cub->player.x, 2) + pow(ver_intercept.y - cub->player.y, 2)))
-	// {
-	// 	end.x = cub->start.x + (hor_intercept.x * LARGE_TO_SMALL_SCALE);
-	// 	end.y = cub->start.y + (hor_intercept.y * LARGE_TO_SMALL_SCALE);
-	// }
-	// else
-	// {
-	// 	end.x = cub->start.x + (ver_intercept.x * LARGE_TO_SMALL_SCALE);
-	// 	end.y = cub->start.y + (ver_intercept.y * LARGE_TO_SMALL_SCALE);
-	// }
-}
+- player must be present in order of game to launch

@@ -6,21 +6,33 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:40:49 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/04 13:21:31 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/04 15:09:25 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	draw_pixel(t_cub *cub, int x, int y, int color)
+void	draw_pixel_frame(t_cub *cub, int x, int y, int color)
 {
 	char	*pos;
 
 	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
 		return ;
 	pos = cub->settings.frame_addr
-		+ (y * cub->settings.size_line
-			+ (x * (cub->settings.bits_per_pixel / 8)));
+		+ (y * cub->settings.frame_size_line
+			+ (x * (cub->settings.frame_bits_per_pixel / 8)));
+	*(int *)pos = color;
+}
+
+void	draw_pixel(t_cub *cub, int x, int y, int color)
+{
+	char	*pos;
+
+	if (x < 0 || x >= cub->map_width * TILE_SIZE || y < 0 || y >= cub->map_height * TILE_SIZE)
+		return ;
+	pos = cub->settings.minimap_layer_addr
+		+ (y * cub->settings.minimap_size_line
+			+ (x * (cub->settings.minimap_bits_per_pixel / 8)));
 	*(int *)pos = color;
 }
 
@@ -50,10 +62,10 @@ void	draw_square(t_cub *cub, t_cord pos, t_cord *start, int color)
 	f.y = 0;
 	while (f.y < MAP_TILE_SIZE)
 	{
-		f.x = 1;
+		f.x = 0;
 		while (f.x < MAP_TILE_SIZE)
 		{
-			if (f.y % MAP_TILE_SIZE)
+			// if (f.y % MAP_TILE_SIZE)
 				draw_pixel(cub, ((pos.x * MAP_TILE_SIZE) + start->x + f.x),
 					((pos.y * MAP_TILE_SIZE) + start->y + f.y), color);
 			f.x++;

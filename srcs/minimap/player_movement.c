@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 13:04:50 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/03 13:29:07 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:50:40 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	key_pressed(int key, t_cub *cub)
 	else if (cub->player.angle_rotation < 0)
 		cub->player.angle_rotation += 2 * PI;
 	reset_frame(cub);
+	update_rays(cub);
 	display_minimap(cub);
 	mlx_put_image_to_window(cub->settings.mlx,
 		cub->settings.window, cub->settings.frame, 0, 0);
