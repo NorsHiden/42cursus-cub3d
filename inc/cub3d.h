@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/02 09:23:15 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/04 13:06:46 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,24 @@
 
 # define MINIMAP_FACTOR 1
 # define TILE_SIZE 32
+
 # define MAP_TILE_SIZE TILE_SIZE / MINIMAP_FACTOR
 # define PLAYER_SIZE MAP_TILE_SIZE / 4
 
-# define LARGE_TO_SMALL_SCALE (((double)WINDOW_WIDTH / (double)MINIMAP_FACTOR) / (double)WINDOW_WIDTH)
+# define MAP_TILE_FACTOR (double)WINDOW_WIDTH / (double)MINIMAP_FACTOR
+
+# define LARGE_TO_SMALL_SCALE (MAP_TILE_FACTOR / (double)WINDOW_WIDTH)
 
 # define PI 3.14159265359
+# define PPM 5
+# define FOV_DEGREE 60
+
+# define UP 13
+# define RIGHT 2
+# define DOWN 1
+# define LEFT 0
+# define LEFT_ARR 123
+# define RIGHT_ARR 124
 
 typedef struct s_file_data
 {
@@ -89,13 +101,32 @@ typedef struct s_cord
 	int	y;
 }	t_cord;
 
+typedef struct s_fcord
+{
+	double	x;
+	double	y;
+}	t_fcord;
+
+typedef struct s_ray
+{
+	double	x;
+	double	y;
+	double	angle_rotation;
+	int		is_facing_up;
+	int		is_facing_left;
+}	t_ray;
+
 typedef struct s_cub
 {
 	t_file_data	data;
 	t_texture	texture;
 	t_settings	settings;
 	t_player	player;
+	t_cord		start;
+	t_ray		rays[WINDOW_WIDTH];
 	char		**map;
+	int			map_height;
+	int			map_width;
 	int			player_orientation;
 }	t_cub;
 
@@ -124,6 +155,24 @@ void	map_valid(t_cub *cub);
 void	check_line_validation(char **map, int *player_orientation, size_t y);
 void	check_symbol_sensitivity(char **map, size_t y, size_t x, char sym);
 size_t	ptrlen(char **str);
+
+/*--------------------MINIMAP_FUNCTIONS--------------------------*/
+void	draw_player(t_cub *cub);
+void	setup_player(t_cub *cub);
+void	fill_player(t_cub *cub, t_cord pos);
+void	draw_pixel(t_cub *cub, int x, int y, int color);
+void	draw_minimap(t_cub *cub);
+void	draw_square(t_cub *cub, t_cord pos, t_cord *start, int color);
+void	draw_line(t_cub *cub, t_cord start, t_cord end, int color);
+void	reset_frame(t_cub *cub);
+void	display_minimap(t_cub *cub);
+void	update_rays(t_cub *cub);
+void	cast_ray(t_cub *cub, double angle, int idx);
+t_fcord	get_vertical_intersection(t_cub *cub, t_ray *ray);
+t_fcord	get_horizontal_intersection(t_cub *cub, t_ray *ray);
+
+/*--------------------HOOK_FUNCTIONS--------------------------*/
+int		key_pressed(int key, t_cub *cub);
 
 /*-----------------ERROR_HANDLING_FUNCTIONS--------------------*/
 void	throw_error(char *err, char *cause);
