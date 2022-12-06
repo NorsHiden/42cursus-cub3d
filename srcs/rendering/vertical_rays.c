@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 13:04:35 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/04 13:20:40 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:52:29 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,21 @@ t_fcord	get_vertical_intersection(t_cub *cub, t_ray *ray)
 	return (intercept);
 }
 
+void	setup_ray(t_ray *ray, t_fcord *intercept, double distance, int is_hor)
+{
+	ray->x = intercept->x;
+	ray->y = intercept->y;
+	ray->distance = distance;
+	ray->is_hor = is_hor;
+}
+
 void	cast_ray(t_cub *cub, double angle, int idx)
 {
 	t_ray	*ray;
 	t_fcord	hor_intercept;
 	t_fcord	ver_intercept;
+	double	hor_dis;
+	double	ver_dis;
 
 	ray = &cub->rays[idx];
 	ray->angle_rotation = angle;
@@ -63,19 +73,14 @@ void	cast_ray(t_cub *cub, double angle, int idx)
 			&& ray->angle_rotation < 3 * PI / 2);
 	hor_intercept = get_horizontal_intersection(cub, ray);
 	ver_intercept = get_vertical_intersection(cub, ray);
-	if (sqrt(pow(hor_intercept.x - cub->player.x, 2)
-			+ pow(hor_intercept.y - cub->player.y, 2))
-		< sqrt(pow(ver_intercept.x - cub->player.x, 2)
-			+ pow(ver_intercept.y - cub->player.y, 2)))
-	{
-		ray->x = hor_intercept.x;
-		ray->y = hor_intercept.y;
-	}
+	hor_dis = sqrt(pow(hor_intercept.x - cub->player.x, 2)
+			+ pow(hor_intercept.y - cub->player.y, 2));
+	ver_dis = sqrt(pow(ver_intercept.x - cub->player.x, 2)
+			+ pow(ver_intercept.y - cub->player.y, 2));
+	if (hor_dis < ver_dis)
+		setup_ray(ray, &hor_intercept, hor_dis, 1);
 	else
-	{
-		ray->x = ver_intercept.x;
-		ray->y = ver_intercept.y;
-	}
+		setup_ray(ray, &ver_intercept, ver_dis, 0);
 }
 
 void	update_rays(t_cub *cub)

@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/04 17:04:38 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:29:33 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define LARGE_TO_SMALL_SCALE (MAP_TILE_FACTOR / (double)WINDOW_WIDTH)
 
 # define PI 3.14159265359
-# define PPM 5
+# define PPM 10
 # define FOV_DEGREE 60
 
 # define UP 13
@@ -119,6 +119,8 @@ typedef struct s_ray
 	double	angle_rotation;
 	int		is_facing_up;
 	int		is_facing_left;
+	double	distance;
+	int		is_hor;
 }	t_ray;
 
 typedef struct s_cub
@@ -133,6 +135,7 @@ typedef struct s_cub
 	int			map_height;
 	int			map_width;
 	int			player_orientation;
+	int			pos_x;
 }	t_cub;
 
 /*------------------IMPORT_FUNCTIONS---------------------------*/
@@ -170,7 +173,6 @@ void	draw_pixel_frame(t_cub *cub, int x, int y, int color);
 void	draw_minimap(t_cub *cub);
 void	draw_square(t_cub *cub, t_cord pos, t_cord *start, int color);
 void	draw_line(t_cub *cub, t_cord start, t_cord end, int color);
-void	reset_frame(t_cub *cub);
 void	display_minimap(t_cub *cub);
 void	update_rays(t_cub *cub);
 void	cast_ray(t_cub *cub, double angle, int idx);
@@ -183,7 +185,9 @@ void	display_minimap(t_cub *cub);
 
 /*--------------------GAME_FUNCTIONS--------------------------*/
 void	launch_game(t_cub *cub);
-void 	reset_frame(t_cub *cub);
+
+/*--------------------3D_MAP_FUNCTIONS--------------------------*/
+void	display_3dmap(t_cub	*cub);
 
 /*--------------------HOOK_FUNCTIONS--------------------------*/
 int		key_pressed(int key, t_cub *cub);

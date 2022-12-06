@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:03:10 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/04 17:06:28 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:31:17 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,6 @@ void	display_minimap(t_cub *cub)
 	draw_rays(cub);
 	draw_player(cub);
 	render_layer(cub);
-}
-
-void	reset_frame(t_cub *cub)
-{
-	t_cord	pos;
-
-	pos.y = 0;
-	while (pos.y < WINDOW_HEIGHT)
-	{
-		pos.x = 0;
-		while (pos.x < WINDOW_WIDTH)
-			draw_pixel_frame(cub, pos.x++, pos.y, 0);
-		pos.y++;
-	}
 }
 
 void	launch_game(t_cub *cub)
@@ -53,9 +39,8 @@ void	launch_game(t_cub *cub)
 			&cub->settings.minimap_bits_per_pixel,
 			&cub->settings.minimap_size_line, &cub->settings.minimap_endian);
 	setup_player(cub);
-	cub->start.x = 20;
-	cub->start.y = 20;
 	update_rays(cub);
+	display_3dmap(cub);
 	display_minimap(cub);
 	mlx_put_image_to_window(cub->settings.mlx,
 		cub->settings.window, cub->settings.frame, 0, 0);
