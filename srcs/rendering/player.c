@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:37:44 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/04 13:21:48 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/06 11:55:53 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ void	draw_player(t_cub *cub)
 		while (pos.x < 4)
 		{
 			draw_pixel(cub, ((cub->player.x * LARGE_TO_SMALL_SCALE)
-					+ cub->start.x + pos.x++), ((cub->player.y
-						* LARGE_TO_SMALL_SCALE)
-					+ cub->start.y + pos.y), 0xFF0000);
+				+ pos.x++), ((cub->player.y * LARGE_TO_SMALL_SCALE)
+				+ pos.y), 0xBF7E78);
 		}
 		pos.y++;
 	}

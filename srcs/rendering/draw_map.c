@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:40:49 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 08:18:02 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/06 11:55:25 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_line(t_cub *cub, t_cord start, t_cord end, int color)
 	}
 }
 
-void	draw_square(t_cub *cub, t_cord pos, t_cord *start, int color)
+void	draw_square(t_cub *cub, t_cord pos, int color)
 {
 	t_cord	f;
 
@@ -66,8 +66,8 @@ void	draw_square(t_cub *cub, t_cord pos, t_cord *start, int color)
 		f.x = 0;
 		while (f.x < MAP_TILE_SIZE)
 		{
-			draw_pixel(cub, ((pos.x * MAP_TILE_SIZE) + start->x + f.x),
-				((pos.y * MAP_TILE_SIZE) + start->y + f.y), color);
+			draw_pixel(cub, ((pos.x * MAP_TILE_SIZE) + f.x),
+				((pos.y * MAP_TILE_SIZE) + f.y), color);
 			f.x++;
 		}
 		f.y++;
@@ -77,17 +77,24 @@ void	draw_square(t_cub *cub, t_cord pos, t_cord *start, int color)
 void	draw_minimap(t_cub *cub)
 {
 	t_cord	pos;
+	t_cord	end;
 
-	pos.y = 0;
-	while (cub->map[pos.y])
+	if ((int)(cub->player.y / TILE_SIZE) < 5)
+		pos.y = 0;
+	else 
+		pos.y = (int)(cub->player.y / TILE_SIZE) - 5;
+	while (cub->map[pos.y] && pos.y < (int)(cub->player.y / TILE_SIZE) + 10)
 	{
-		pos.x = 0;
-		while (cub->map[pos.y][pos.x])
+		if ((int)(cub->player.x / TILE_SIZE) < 5)
+			pos.x = 0;
+		else 
+			pos.x = (int)(cub->player.x / TILE_SIZE) - 5;
+		while (cub->map[pos.y][pos.x] && pos.x < (int)(cub->player.x / TILE_SIZE) + 10)
 		{
 			if (cub->map[pos.y][pos.x] == '1')
-				draw_square(cub, pos, &cub->start, 0xFFFFFF);
+				draw_square(cub, pos, 0xA67C58);
 			else if (ft_strchr("0NSWE", cub->map[pos.y][pos.x]))
-				draw_square(cub, pos, &cub->start, 0xAAAAAA);
+				draw_square(cub, pos, 0xD9BBA0);
 			pos.x++;
 		}
 		pos.y++;

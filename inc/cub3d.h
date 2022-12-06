@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 09:07:42 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/06 11:00:45 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ typedef struct s_texture
 	void	*so;
 	void	*we;
 	void	*ea;
+	void	*frame;
+	int		width;
+	int		height;
 	int		floor;
 	int		ceiling;
 }	t_texture;
@@ -116,6 +119,8 @@ typedef struct s_ray
 {
 	double	x;
 	double	y;
+	int		third_x;
+	int		third_y;
 	double	angle_rotation;
 	int		is_facing_up;
 	int		is_facing_left;
@@ -171,7 +176,7 @@ void	fill_player(t_cub *cub, t_cord pos);
 void	draw_pixel(t_cub *cub, int x, int y, int color);
 void	draw_pixel_frame(t_cub *cub, int x, int y, int color);
 void	draw_minimap(t_cub *cub);
-void	draw_square(t_cub *cub, t_cord pos, t_cord *start, int color);
+void	draw_square(t_cub *cub, t_cord pos, int color);
 void	draw_line(t_cub *cub, t_cord start, t_cord end, int color);
 void	display_minimap(t_cub *cub);
 void	update_rays(t_cub *cub);

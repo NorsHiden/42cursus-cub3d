@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:11:49 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 08:20:01 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/06 11:58:27 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,19 @@ void	draw_rays(t_cub *cub)
 	i = 0;
 	while (i < WINDOW_WIDTH)
 	{
-		start.x = cub->start.x + (cub->player.x * LARGE_TO_SMALL_SCALE);
-		start.y = cub->start.y + (cub->player.y * LARGE_TO_SMALL_SCALE);
-		end.x = cub->start.x + (cub->rays[i].x * LARGE_TO_SMALL_SCALE);
-		end.y = cub->start.y + (cub->rays[i].y * LARGE_TO_SMALL_SCALE);
-		draw_line(cub, start, end, 0x0000FF);
+		start.x = cub->player.x * LARGE_TO_SMALL_SCALE;
+		start.y = cub->player.y * LARGE_TO_SMALL_SCALE;
+		if (cub->rays[i].distance > 160)
+		{
+			end.x = (cub->player.x + cos(cub->rays[i].angle_rotation) * 160) * LARGE_TO_SMALL_SCALE;
+			end.y = (cub->player.y + sin(cub->rays[i].angle_rotation) * 160) * LARGE_TO_SMALL_SCALE;
+		}
+		else
+		{
+			end.x = cub->rays[i].x * LARGE_TO_SMALL_SCALE;
+			end.y = cub->rays[i].y * LARGE_TO_SMALL_SCALE;
+		}
+		draw_line(cub, start, end, 0xF2E4DC);
 		i++;
 	}
 }
@@ -46,8 +54,8 @@ void	render_layer(t_cub *cub)
 	t_cord	pos;
 	int		color;
 
-	start.x = cub->player.x - 80;
-	start.y = cub->player.y - 80;
+	start.x = cub->player.x - 100;
+	start.y = cub->player.y - 100;
 	pos.y = 0;
 	while (pos.y < 200)
 	{
@@ -56,10 +64,11 @@ void	render_layer(t_cub *cub)
 		{
 			color = get_color_from_minimap(cub,
 					start.x + pos.x, start.y + pos.y);
-			if (color > 0)
-				draw_pixel_frame(cub,
-					cub->start.x + pos.x,
-					cub->start.x + pos.y, color);
+			if (color <= 0)
+				color = 0x2b1b12;
+			draw_pixel_frame(cub,
+				cub->start.x + pos.x,
+				cub->start.y + pos.y, color);
 			pos.x++;
 		}
 		pos.y++;
