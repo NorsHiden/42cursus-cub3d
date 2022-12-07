@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 11:00:45 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:31:20 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define LARGE_TO_SMALL_SCALE (MAP_TILE_FACTOR / (double)WINDOW_WIDTH)
 
 # define PI 3.14159265359
-# define PPM 10
+# define PPM 6
 # define FOV_DEGREE 60
 
 # define UP 13
@@ -53,6 +53,7 @@
 # define LEFT 0
 # define LEFT_ARR 123
 # define RIGHT_ARR 124
+# define ESC 53
 
 typedef struct s_file_data
 {
@@ -190,6 +191,7 @@ void	display_minimap(t_cub *cub);
 
 /*--------------------GAME_FUNCTIONS--------------------------*/
 int		key_pressed(int key, t_cub *cub);
+int		mouse_movement(int x, int y, t_cub *cub);
 void	launch_game(t_cub *cub);
 
 /*--------------------3D_MAP_FUNCTIONS--------------------------*/

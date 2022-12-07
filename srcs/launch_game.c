@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 17:03:10 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 11:41:46 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:47:47 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ void	display_3dmap(t_cub	*cub)
 	}
 }
 
+int	quit_cub3d(t_cub *cub)
+{
+	(void)cub;
+	exit(0);
+}
+
 void	launch_game(t_cub *cub)
 {
 	cub->settings.window = mlx_new_window(
@@ -89,6 +95,10 @@ void	launch_game(t_cub *cub)
 	display_minimap(cub);
 	mlx_put_image_to_window(cub->settings.mlx,
 		cub->settings.window, cub->settings.frame, 0, 0);
+	mlx_mouse_move(cub->settings.window, (WINDOW_WIDTH / 2), (WINDOW_HEIGHT / 2));
+	mlx_mouse_hide(cub->settings.window);
 	mlx_hook(cub->settings.window, 2, 0, key_pressed, cub);
+	mlx_hook(cub->settings.window, 17, 0, quit_cub3d, cub);
+	mlx_hook(cub->settings.window, 6, 0, mouse_movement, cub);
 	mlx_loop(cub->settings.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:37:44 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 11:55:53 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/07 08:44:42 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,6 @@ void	setup_player(t_cub *cub)
 		}
 		pos.y++;
 	}
+	if (!cub->map[pos.y])
+		throw_error("player not found", NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:40:49 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 11:55:25 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/07 11:12:19 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	draw_square(t_cub *cub, t_cord pos, int color)
 	f.y = 0;
 	while (f.y < MAP_TILE_SIZE)
 	{
+		draw_pixel(cub, ((pos.x * MAP_TILE_SIZE) + 0),
+			((pos.y * MAP_TILE_SIZE) + f.y), 0);
 		f.x = 0;
 		while (f.x < MAP_TILE_SIZE)
 		{
