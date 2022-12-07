@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:11:49 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 11:58:27 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:22:55 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ void	draw_rays(t_cub *cub)
 		start.y = cub->player.y * LARGE_TO_SMALL_SCALE;
 		if (cub->rays[i].distance > 160)
 		{
-			end.x = (cub->player.x + cos(cub->rays[i].angle_rotation) * 160) * LARGE_TO_SMALL_SCALE;
-			end.y = (cub->player.y + sin(cub->rays[i].angle_rotation) * 160) * LARGE_TO_SMALL_SCALE;
+			end.x = (cub->player.x + cos(cub->rays[i].angle_rotation) * 160)
+				* LARGE_TO_SMALL_SCALE;
+			end.y = (cub->player.y + sin(cub->rays[i].angle_rotation) * 160)
+				* LARGE_TO_SMALL_SCALE;
 		}
 		else
 		{

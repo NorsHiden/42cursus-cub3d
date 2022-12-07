@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/07 11:31:20 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:28:26 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,12 @@ void	display_minimap(t_cub *cub);
 /*--------------------GAME_FUNCTIONS--------------------------*/
 int		key_pressed(int key, t_cub *cub);
 int		mouse_movement(int x, int y, t_cub *cub);
+int		move_or_not(t_cub *cub, double next_x, double next_y);
+int		quit_cub3d(t_cub *cub);
+void	move_up(int key, t_cub *cub);
+void	move_down(int key, t_cub *cub);
+void	move_left(int key, t_cub *cub);
+void	move_right(int key, t_cub *cub);
 void	launch_game(t_cub *cub);
 
 /*--------------------3D_MAP_FUNCTIONS--------------------------*/
@@ -203,6 +209,9 @@ void	draw_line_frame(t_cub *cub, t_cord start, t_cord end, int color);
 void	render_ray(t_cub *cub, t_ray *ray);
 void	render_ceiling(t_cub *cub, int x, double wall_height);
 void	render_floor(t_cub *cub, int x, double wall_height);
+void	display_minimap(t_cub *cub);
+void	render_frame(t_cub *cub);
+int		frame_color(t_cub *cub, int x, int y);
 
 /*-----------------ERROR_HANDLING_FUNCTIONS--------------------*/
 void	throw_error(char *err, char *cause);

@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:05:06 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 09:07:06 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:18:13 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	render_ray(t_cub *cub, t_ray *ray)
 {
 	double	wall_height;
 
-	wall_height = (TILE_SIZE / (ray->distance * cos(ray->angle_rotation - cub->player.angle_rotation))) * (WINDOW_WIDTH / 2) / tan((FOV_DEGREE * (PI / 180) / 2));
+	wall_height = (
+			TILE_SIZE / (ray->distance * cos(
+					ray->angle_rotation - cub->player.angle_rotation))
+			) * (WINDOW_WIDTH / 2) / tan((FOV_DEGREE * (PI / 180) / 2));
 	render_ceiling(cub, cub->pos_x, wall_height);
 	if (ray->is_hor && ray->is_facing_up)
 		draw_texture_line(cub, ray, wall_height, cub->texture.no);

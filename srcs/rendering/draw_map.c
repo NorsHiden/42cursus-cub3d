@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 10:40:49 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/07 11:12:19 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:17:16 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,16 @@ void	draw_minimap(t_cub *cub)
 
 	if ((int)(cub->player.y / TILE_SIZE) < 5)
 		pos.y = 0;
-	else 
+	else
 		pos.y = (int)(cub->player.y / TILE_SIZE) - 5;
 	while (cub->map[pos.y] && pos.y < (int)(cub->player.y / TILE_SIZE) + 10)
 	{
 		if ((int)(cub->player.x / TILE_SIZE) < 5)
 			pos.x = 0;
-		else 
+		else
 			pos.x = (int)(cub->player.x / TILE_SIZE) - 5;
-		while (cub->map[pos.y][pos.x] && pos.x < (int)(cub->player.x / TILE_SIZE) + 10)
+		while (cub->map[pos.y][pos.x]
+			&& pos.x < (int)(cub->player.x / TILE_SIZE) + 10)
 		{
 			if (cub->map[pos.y][pos.x] == '1')
 				draw_square(cub, pos, 0xA67C58);

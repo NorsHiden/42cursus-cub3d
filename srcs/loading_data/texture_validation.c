@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 13:46:28 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/06 13:18:39 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/07 13:14:10 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	import_texture(t_cub *cub)
 	cub->texture.ea = valid_texture(cub, cub->data.ea_filename);
 	cub->texture.floor = valid_color(cub, cub->data.floor_color, 'F');
 	cub->texture.ceiling = valid_color(cub, cub->data.ceiling_color, 'C');
-	cub->texture.frame = mlx_xpm_file_to_image(cub->settings.mlx, "./textures/frame.xpm", &cub->texture.width, &cub->texture.height);
+	cub->texture.frame = mlx_xpm_file_to_image(cub->settings.mlx,
+			"./textures/frame.xpm", &cub->texture.width, &cub->texture.height);
 	adjust_map_size(cub);
 }
