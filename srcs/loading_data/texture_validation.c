@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 13:46:28 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/07 13:14:10 by nelidris         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:29:29 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	grab_color(char *color, size_t *i)
 	{
 		portion_color = (portion_color * 10) + (color[*i] - 48);
 		if (portion_color > 255)
-			throw_error(": no rgb color found3", color);
+			throw_error(": no rgb color found", color);
 		(*i)++;
 	}
 	return (portion_color);
@@ -61,7 +61,7 @@ void	check_color(char *color, int *full_color, int *times)
 				i++;
 		}
 		else if (color[i] != ' ')
-			throw_error(": no rgb color found1", color);
+			throw_error(": no rgb color found", color);
 		else
 			i++;
 	}
@@ -75,6 +75,8 @@ int	valid_color(t_cub *cub, char *color, char c)
 	full_color = 0;
 	times = 0;
 	check_color(ft_strchr(color, c) + 1, &full_color, &times);
+	if (times != 3)
+		throw_error(": invalid rgb color", color);
 	return (full_color);
 }
 

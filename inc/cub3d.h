@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 09:31:05 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/07 13:28:26 by nelidris         ###   ########.fr       */
+/*   Updated: 2022/12/08 13:35:30 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define LARGE_TO_SMALL_SCALE (MAP_TILE_FACTOR / (double)WINDOW_WIDTH)
 
 # define PI 3.14159265359
-# define PPM 6
+# define PPM 10
 # define FOV_DEGREE 60
 
 # define UP 13

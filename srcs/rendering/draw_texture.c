@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 09:05:06 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/07 13:18:13 by nelidris         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:19:23 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	render_floor(t_cub *cub, int x, double wall_height)
 	int	y;
 	int	end;
 
-	y = WINDOW_HEIGHT / 2 + wall_height / 2;
+	y = (WINDOW_HEIGHT / 2 + wall_height / 2) - 1;
 	end = WINDOW_HEIGHT;
 	while (y < end)
 	{

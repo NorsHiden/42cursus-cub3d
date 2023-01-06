@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 08:29:56 by nelidris          #+#    #+#             */
-/*   Updated: 2022/12/03 12:09:48 by nelidris         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:19:13 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_symbol_sensitivity(char **map, size_t y, size_t x, char sym)
 {
 	if (map[y][x] != sym)
 		return ;
-	if (y == 0 || x == 0 || y == ptrlen(map) - 1 || x == ft_strlen(map[y] - 1))
+	if (y == 0 || x == 0 || y == ptrlen(map) - 1 || x == ft_strlen(map[y]) - 1)
 		throw_error(": invalid map design", map[y]);
 	if (x > 0 && (!ft_strchr("01NSWE", map[y][x - 1])
 		|| !ft_strchr("01NSWE", map[y][x + 1])))

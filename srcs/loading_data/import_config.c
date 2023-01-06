@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 08:48:19 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/29 13:45:28 by nelidris         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:27:14 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ void	import_symbol(t_cub *cub, int symbol, char *line)
 	size_t	i;
 	char	**target;
 
-	i = 0;
+	i = 2;
 	while (line[i] && line[i] != '.' && line[i] != '/')
+	{
+		if (line[i] != ' ' && line[i] != '\t')
+			throw_error(": path not valid", line);
 		i++;
+	}
 	if (!line[i])
 		throw_error(": path not found", line);
 	target = pointer_to_target_symbol(cub, symbol);
@@ -96,7 +100,7 @@ void	import_cardinal_direction(t_cub *cub, size_t *idx, int sym)
 		{
 			if (find_symbol(cub->data.file_data[*idx]) != sym)
 				throw_error(": texture not found", cub->data.file_data[*idx]);
-			import_symbol(cub, sym, cub->data.file_data[*idx]);
+			import_symbol(cub, sym, checker);
 			(*idx)++;
 			break ;
 		}
