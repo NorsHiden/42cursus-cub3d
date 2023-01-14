@@ -6,7 +6,7 @@
 /*   By: nelidris <nelidris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 08:47:14 by nelidris          #+#    #+#             */
-/*   Updated: 2022/11/29 13:43:07 by nelidris         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:16:35 by nelidris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	import_configs(t_cub *cub)
 
 void	import_file(t_cub *cub, char *filename)
 {
+	if (ft_strlen(filename) < 4 || ft_strcmp(".cub", &filename[ft_strlen(filename) - 4]))
+		throw_error(": wrong extension", filename);
 	cub->data.fd = open(filename, O_RDONLY);
 	if (cub->data.fd < 0)
 		throw_error(": inaccessible file", filename);
